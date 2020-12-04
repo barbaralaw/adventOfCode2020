@@ -1,21 +1,19 @@
 // Advent of Code 2020 - Day 1 Puzzle 1
 
 function firstStar(nums) {
-    for (i=0; i < nums.length; i++) {
-        let product = null;
-        numB = i + 1;
-        while (numB < nums.length) {
-            if (nums[i] + nums[numB] == 2020) {
-                product = nums[i] * nums[numB];
-                return (`Expense report ${nums[i]} and ${nums[numB]} have a product of ${product}.`);
-            } else {
-                numB++;
-            }
-        if (typeof(product) == 'number') {
-            break;
-        }
-      }
-   }
+  let lookup = {};
+  for (i=0; i < nums.length; i++) {
+    let product = null;
+    let currKey = thisArray[i];
+    lookup[currKey] = true;
+    if (lookup[2020-currKey] === true) {
+      product = currKey * (2020-currKey);
+      return (`Expense report ${currKey} and ${2020-currKey} have a product of ${product}.`);
+    }
+    if (typeof(product) == 'number') {
+      break;
+    }
+  }
 }
 
 const thisArray = [
