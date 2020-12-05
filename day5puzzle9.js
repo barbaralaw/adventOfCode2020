@@ -1,25 +1,30 @@
-
-seatArray = []
+let seatArray = [];
+let seatId = [];
 function seatIdFinder(ticket) {
-  for (i=0; i < ticket.length-2; i++) {
-    minRow = 0;
-    maxRow = 128;
-    if (ticket[i] === 'F') {
-      maxRow = Math.floor((maxRow-minRow)/2);
-    } else if (ticket[i] === 'B') {
-      minRow = Math.ceil((maxRow-minRow)/2);
+  for (n=0; n < ticket.length; n++) {
+    for (i=0; i < ticket[i].length-2; i++) {
+      minRow = 0;
+      maxRow = 128;
+      if (ticket[n].charAt(i) === 'F') {
+        maxRow = Math.floor((maxRow-minRow)/2);
+        console.log(maxRow);
+      } else if (ticket[i].charAt(i) === 'B') {
+        minRow = Math.ceil((maxRow-minRow)/2);
+        console.log(minRow);
+      }
+      seatId[i] = (minRow*8)+0;
+      console.log(seatId[i]);
     }
-    seatId[i] = (minRow*8)+0;
-  }
-  for (j=7; j < ticket.length; j++) {
-    minSeat = 0;
-    maxSeat = 7;
-    if (ticket[j] === 'L') {
-      minSeat = Math.floor((maxSeat-minSeat)/2);
-    } else if (ticket[j] === 'R') {
-      maxSeat = Math.ceil((maxSeat - minSeat)/2);
+    for (j=7; j < ticket[i].length; j++) {
+      minSeat = 0;
+      maxSeat = 7;
+      if (ticket[i].charAt(j) === 'L') {
+        minSeat = Math.floor((maxSeat-minSeat)/2);
+      } else if (ticket[i].charAt(j) === 'R') {
+        maxSeat = Math.ceil((maxSeat - minSeat)/2);
+      }
+      seatId[i] = seatId[i] + minSeat;
     }
-    seatId[i] = seatId[i] + minSeat;
   }
   return seatId;
 }
