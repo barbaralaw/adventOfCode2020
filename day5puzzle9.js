@@ -1,6 +1,5 @@
-let seatArray = [];
-let seatId = [];
 function seatIdFinder(ticket) {
+  let seatId = [];
   for (n=0; n < ticket.length; n++) {
     minRow = 0;
     maxRow = 127;
@@ -32,16 +31,17 @@ function seatIdFinder(ticket) {
           minSeat = Math.ceil((maxSeat - minSeat)/2) + minSeat;
           console.log(`Ticket ${n} current min Seat ${minSeat}`);
         }
-        seatId[n] = seatId[n] + minSeat;
-        console.log(`Ticket # ${n} has final seat ID ${seatId[n]}`);
       }
     }
+    seatId[n] = seatId[n] + minSeat;
+    console.log(`Ticket # ${n} has final seat ID ${seatId[n]}`);
   }
+  console.log(seatId);
   return seatId;
 }
 
 function highestId(ticket) {
-  seatIdFinder(ticket);
+  let seatId = seatIdFinder(ticket);
   maxId = 0;
   for (k=0; k < seatId.length; k++) {
     if (seatId[k] > maxId) {
@@ -51,7 +51,13 @@ function highestId(ticket) {
   console.log(`The highest seat ID is ${maxId}`);
 }
 
-ticketArray = [
+let testArray = [
+  "BFFFBBFRRR",
+  "FFFBBBFRRR",
+  "BBFFBBFRLL"
+]
+
+let ticketArray = [
 "FBFBBFBRRL",
 "BBFFBFFRLR",
 "FBBFFBBLLL",
@@ -859,4 +865,4 @@ ticketArray = [
 "FBBBBFFRLL"
 ];
 
-highestId(ticketArray);
+highestId(testArray);
