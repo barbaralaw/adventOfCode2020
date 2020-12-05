@@ -4,39 +4,37 @@ function seatIdFinder(ticket) {
   for (n=0; n < ticket.length; n++) {
     minRow = 0;
     maxRow = 127;
-    for (i=0; i < ticket[n].length-2; i++) {
-      if (minRow === maxRow){
-        break;
-      }
-      if (ticket[n].charAt(i) === 'F') {
-        if (Math.floor((maxRow-minRow)/2) >= minRow) {
-          maxRow = Math.floor((maxRow-minRow)/2) + minRow;
-        }
-        console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
-      } else if (ticket[n].charAt(i) === 'B') {
-        if (Math.floor((maxRow-minRow)/2) >= minRow) {
-          minRow = Math.ceil((maxRow-minRow)/2) + minRow;
-        }
-        console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
-      }
-      seatId[n] = (minRow*8)+0;
-      console.log(`Ticket # ${n} has half completed seat ID ${seatId[n]}`);
-    }
     minSeat = 0;
     maxSeat = 7;
-    for (j=7; j < ticket[n].length; j++) {
-      if (minSeat === maxSeat){
-        break;
+    for (m=0; m < ticket[n].length; m++) {
+      for (i=0; i < ticket[n].length-2; i++) {
+        if (minRow === maxRow){
+          break;
+        }
+        if (ticket[n].charAt(i) === 'F') {
+          maxRow = Math.floor((maxRow-minRow)/2) + minRow;
+          console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
+        } else if (ticket[n].charAt(i) === 'B') {
+          minRow = Math.ceil((maxRow-minRow)/2) + minRow;
+          console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
+        }
+        seatId[n] = (minRow*8)+0;
+        console.log(`Ticket # ${n} has half completed seat ID ${seatId[n]}`);
       }
-      if (ticket[n].charAt(j) === 'L') {
-        maxSeat = Math.floor((maxSeat-minSeat)/2) + minSeat;
-        console.log(`Ticket ${n} current max Seat ${maxSeat}`);
-      } else if (ticket[n].charAt(j) === 'R') {
-        minSeat = Math.ceil((maxSeat - minSeat)/2) + minSeat;
-        console.log(`Ticket ${n} current min Seat ${minSeat}`);
+      for (j=7; j < ticket[n].length; j++) {
+        if (minSeat === maxSeat){
+          break;
+        }
+        if (ticket[n].charAt(j) === 'L') {
+          maxSeat = Math.floor((maxSeat-minSeat)/2) + minSeat;
+          console.log(`Ticket ${n} current max Seat ${maxSeat}`);
+        } else if (ticket[n].charAt(j) === 'R') {
+          minSeat = Math.ceil((maxSeat - minSeat)/2) + minSeat;
+          console.log(`Ticket ${n} current min Seat ${minSeat}`);
+        }
+        seatId[n] = seatId[n] + minSeat;
+        console.log(`Ticket # ${n} has final seat ID ${seatId[n]}`);
       }
-      seatId[n] = seatId[n] + minSeat;
-      console.log(`Ticket # ${n} has final seat ID ${seatId[n]}`);
     }
   }
   return seatId;
