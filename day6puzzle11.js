@@ -4,38 +4,35 @@ function questionYes(groupArray) {
   // Iterate through inner array
   for (j=0; j < groupArray.length; j++) {
     jointStr = jointStr.concat(groupArray[j]);
-    console.log(jointStr);
+  }
     let strArr = jointStr.split('');
     let sorted = strArr.sort();
     let strSorted = sorted.join('');
-    console.log(strSorted);
-    console.log(`strSorted is a ${typeof strSorted}`);
     return strSorted;
-  }
 }
 
 function grpYes(grpAnswers) {
-  for (k=1; k < grpAnswers.length; k++) {
-    console.log(`grpAnswers is a ${typeof grpAnswers}`);
-    if (grpAnswers.charAt(k) === grpAnswers.charAt(k-1)) {
-      grpAnswers.replace(charAt(k), '');
+  for (k = grpAnswers.length-1; k>=0; k--) {
+    if (grpAnswers.charAt(k) === grpAnswers.charAt(k+1)) {
+      grpAnswers = grpAnswers.slice(0, k+1) + grpAnswers.slice(k+2);
     }
   }
-  console.log(`Group answer is ${grpAnswers}`)
-  let grpYes = grpAnswers.length - 1;
-  return grpYes
-  console.log(grpAnswers);
+  let grpYes = grpAnswers.length;
+  return grpYes;
 }
 
 function totalYes(formArray) {
   grpJoined = [];
   groupYes = [];
+  totalYes = 0;
   // Iterate through outer array
   for (i=0; i < formArray.length; i++) {
-      grpJoined[i] = questionYes(formArray[i]);
-      groupYes[i] = grpYes(grpJoined[i]);
+    grpJoined[i] = questionYes(formArray[i]);
+    groupYes[i] = grpYes(grpJoined[i]);
   }
-  let totalYes = groupYes.length - 1;
+  for (i=0; i < groupYes.length; i++) {
+    totalYes = totalYes + groupYes[i];
+  }
   console.log(`Total yeses across all groups is ${totalYes}.`);
 }
 
