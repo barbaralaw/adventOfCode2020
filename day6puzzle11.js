@@ -1,9 +1,9 @@
 
-function questionYes(groupArray) {
+function allYesInGrp(groupArray) {
   let jointStr = "";
   // Iterate through inner array
-  for (j=0; j < groupArray.length; j++) {
-    jointStr = jointStr.concat(groupArray[j]);
+  for (person=0; person < groupArray.length; person++) {
+    jointStr = jointStr.concat(groupArray[person]);
   }
     let strArr = jointStr.split('');
     let sorted = strArr.sort();
@@ -11,32 +11,32 @@ function questionYes(groupArray) {
     return strSorted;
 }
 
-function grpYes(grpAnswers) {
-  for (k = grpAnswers.length-1; k>=0; k--) {
-    if (grpAnswers.charAt(k) === grpAnswers.charAt(k+1)) {
-      grpAnswers = grpAnswers.slice(0, k+1) + grpAnswers.slice(k+2);
+function yesQsInGrp(rawGrpYes) {
+  for (question = rawGrpYes.length-1; question>=0; question--) {
+    if (rawGrpYes.charAt(question) === rawGrpYes.charAt(question+1)) {
+      rawGrpYes = rawGrpYes.slice(0, question+1) + rawGrpYes.slice(question+2);
     }
   }
-  let grpYes = grpAnswers.length;
-  return grpYes;
+  let yesQsInGrp = rawGrpYes.length;
+  return yesQsInGrp;
 }
 
-function totalYes(formArray) {
+function totalYes(allGrpsAns) {
   grpJoined = [];
-  groupYes = [];
+  finalYesQs = [];
   totalYes = 0;
   // Iterate through outer array
-  for (i=0; i < formArray.length; i++) {
-    grpJoined[i] = questionYes(formArray[i]);
-    groupYes[i] = grpYes(grpJoined[i]);
+  for (party=0; party < allGrpsAns.length; party++) {
+    grpJoined[party] = allYesInGrp(allGrpsAns[party]);
+    finalYesQs[party] = yesQsInGrp(grpJoined[party]);
   }
-  for (i=0; i < groupYes.length; i++) {
-    totalYes = totalYes + groupYes[i];
+  for (party=0; party < finalYesQs.length; party++) {
+    totalYes = totalYes + finalYesQs[party];
   }
   console.log(`Total yeses across all groups is ${totalYes}.`);
 }
 
-const grpAnswers = [
+const allGivenAns = [
   [
   "necytxmlfhsu",
   "uecosjvlhpmk",
@@ -3229,4 +3229,4 @@ const grpAnswers = [
   "epfmuhgvstibr"]
 ];
 
-totalYes(grpAnswers);
+totalYes(allGivenAns);
