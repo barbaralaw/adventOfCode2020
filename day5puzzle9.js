@@ -12,13 +12,10 @@ function seatIdFinder(ticket) {
         }
         if (ticket[n].charAt(i) === 'F') {
           maxRow = Math.floor((maxRow-minRow)/2) + minRow;
-          console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
         } else if (ticket[n].charAt(i) === 'B') {
           minRow = Math.ceil((maxRow-minRow)/2) + minRow;
-          console.log(`Ticket ${n} current row is between ${minRow} and ${maxRow}`);
         }
         seatId[n] = (minRow*8)+0;
-        console.log(`Ticket # ${n} has half completed seat ID ${seatId[n]}`);
       }
       for (j=7; j < ticket[n].length; j++) {
         if (minSeat === maxSeat){
@@ -26,17 +23,13 @@ function seatIdFinder(ticket) {
         }
         if (ticket[n].charAt(j) === 'L') {
           maxSeat = Math.floor((maxSeat-minSeat)/2) + minSeat;
-          console.log(`Ticket ${n} current max Seat ${maxSeat}`);
         } else if (ticket[n].charAt(j) === 'R') {
           minSeat = Math.ceil((maxSeat - minSeat)/2) + minSeat;
-          console.log(`Ticket ${n} current min Seat ${minSeat}`);
         }
       }
     }
     seatId[n] = seatId[n] + minSeat;
-    console.log(`Ticket # ${n} has final seat ID ${seatId[n]}`);
   }
-  console.log(seatId);
   return seatId;
 }
 
